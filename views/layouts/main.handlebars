@@ -26,10 +26,16 @@
               <a href="/" class="nav-link px-2 text-secondary">Home</a>
             </li>
           </ul>
-          <div class="text-end">
-            <button type="button" class="btn btn-outline-light me-2">Login</button>
-            <button type="button" class="btn btn-outline-light me-2">Dashboard</button>
-            <button type="button" class="btn btn-outline-light me-2">Logout</button>
+          <div class="d-flex text-end">
+            <form class="m-0" action="/login" method="get" target="_blank">
+              <button type="submit" class="btn btn-outline-light me-2">Login</button>
+            </form>
+            <form class="m-0" action="/dashboard" method="get" target="_blank">
+              <button type="submit" class="btn btn-outline-light me-2">Dashboard</button>
+            </form>
+            <form class="m-0" action="/logout" method="get" target="_blank">
+              <button type="submit" class="btn btn-outline-light me-2">Logout</button>
+            </form>
           </div>
         </div>
       </div>
