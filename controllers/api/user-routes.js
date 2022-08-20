@@ -48,6 +48,7 @@ router.post("/", (req, res) => {
 
 // UPDATE a user
 router.put("/:id", (req, res) => {
+  // Expects {"username":"","password":""}
   User.update(req.body, {
     where: {
       id: req.params.id,
@@ -61,16 +62,38 @@ router.put("/:id", (req, res) => {
       res.json(dbUserData);
     })
     .catch((err) => {
+      console.log(err);
       res.status(500).json(err);
     });
+});
+
+// LOGIN a user
+router.post("/login", (req, res) => {
+  User.findOne({
+    where: {
+      username: req.body.username,
+    },
+  }).then((dbUserData) => {
+    if (!dbUserData) {
+      res.status(400).json({ message: "No user with that username" });
+      return;
+    }
+
+    const validPassword = dbUserData.checkPassword(req.body.password);
+
+    if (!validPassword) {
+      res.status(400).json({ message: "Incorrect Password" });
+      return;
+    }
+
+    res.json({ user: dbUserData, message: "You are now logged in." });
+  });
 });
 
 // DELETE a user
 router.delete("/:id", (req, res) => {
   User.destroy({
-    where: {
-      id: req.params.id,
-    },
+    where: { id: req.params.id },
   })
     .then((dbUserData) => {
       if (!dbUserData) {
@@ -80,6 +103,7 @@ router.delete("/:id", (req, res) => {
       res.json(dbUserData);
     })
     .catch((err) => {
+      console.log(err);
       res.status(500).json(err);
     });
 });
