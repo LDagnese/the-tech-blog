@@ -1,15 +1,13 @@
-<ol class="post-list">
+<ul class="post-list">
   {{#each posts}}
-    <li>
-      <article>
-        <div>
-          <a href="/api/post/{{id}}" target="_blank">{{title}}</a>
-        </div>
-        <div>
-          <p>{{content}}</p>
-          <p>Created at: {{created_at}} by {{user.username}}</p>
-        </div>
-      </article>
-    </li>
+    <article>
+      <div>
+        <a href="/post/{{id}}" target="_blank">{{title}}</a>
+      </div>
+      <div>
+        <p>{{content}}</p>
+        <p>Created at: {{format_date created_at}} by {{user.username}}</p>
+      </div>
+    </article>
   {{/each}}
-</ol>
+</ul>
