@@ -7,7 +7,7 @@
         "es6": true
     },
     "parserOptions": {
-        "ecmaVersion": 8
+        "ecmaVersion": "latest"
     },
     "rules": {
         "no-duplicate-case": "error",
