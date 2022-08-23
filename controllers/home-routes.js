@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
   })
     .then((dbPostData) => {
       const posts = dbPostData.map((post) => post.get({ plain: true }));
-      res.render("homepage", { posts });
+      res.render("homepage", { posts, loggedIn: req.session.loggedIn });
     })
     .catch((err) => {
       console.log(err);
@@ -22,6 +22,12 @@ router.get("/", (req, res) => {
 });
 
 router.get("/post/:id", (req, res) => {
+  // If not logged in and trying to get to a post page, redirect the user to login
+  if (!req.session.loggedIn) {
+    res.redirect("/login");
+    return;
+  }
+
   Post.findOne({
     where: {
       id: req.params.id,
@@ -48,7 +54,7 @@ router.get("/post/:id", (req, res) => {
         return;
       }
       const post = dbPostData.get({ plain: true });
-      res.render("post", { post });
+      res.render("post", { post, loggedIn: req.session.loggedIn });
     })
     .catch((err) => {
       console.log(err);

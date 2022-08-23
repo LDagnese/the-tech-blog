@@ -27,15 +27,18 @@
             </li>
           </ul>
           <div class="d-flex text-end">
-            <form class="m-0" action="/login" method="get">
-              <button type="submit" class="btn btn-outline-light me-2">Login</button>
-            </form>
-            <form class="m-0" action="/dashboard" method="get">
-              <button type="submit" class="btn btn-outline-light me-2">Dashboard</button>
-            </form>
-            <form class="m-0">
-              <button type="submit" class="btn btn-outline-light me-2" id="logout">Logout</button>
-            </form>
+            {{#if loggedIn}}
+              <form class="m-0" action="/dashboard" method="get">
+                <button type="submit" class="btn btn-outline-light me-2">Dashboard</button>
+              </form>
+              <form class="m-0">
+                <button type="submit" class="btn btn-outline-light me-2" id="logout">Logout</button>
+              </form>
+            {{else}}
+              <form class="m-0" action="/login" method="get">
+                <button type="submit" class="btn btn-outline-light me-2">Login</button>
+              </form>
+            {{/if}}
           </div>
         </div>
       </div>
@@ -47,6 +50,8 @@
         <span class="text-muted">Thanks for visiting!</span>
       </div>
     </footer>
-    <script src="/javascript/logout.js"></script>
+    {{#if loggedIn}}
+      <script src="/javascript/logout.js"></script>
+    {{/if}}
   </body>
 </html>
