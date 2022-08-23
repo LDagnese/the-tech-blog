@@ -27,10 +27,10 @@
             </li>
           </ul>
           <div class="d-flex text-end">
+            <form class="m-0" action="/dashboard" method="get">
+              <button type="submit" class="btn btn-outline-light me-2">Dashboard</button>
+            </form>
             {{#if loggedIn}}
-              <form class="m-0" action="/dashboard" method="get">
-                <button type="submit" class="btn btn-outline-light me-2">Dashboard</button>
-              </form>
               <form class="m-0">
                 <button type="submit" class="btn btn-outline-light me-2" id="logout">Logout</button>
               </form>
