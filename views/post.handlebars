@@ -1,4 +1,4 @@
-<article>
+<article class="post-article" data-id="{{post.id}}">
   <div>
     <h1>{{post.title}}</h1>
     <p>{{post.content}}</p>
@@ -16,4 +16,14 @@
       </div>
     {{/each}}
   </div>
+  <form class="comment-post">
+    <div>
+      <label for="comment-text">Leave Comment:</label>
+      <textarea type="text" name="comment-content" id="comment-text"></textarea>
+    </div>
+    <div>
+      <button type="submit">Submit</button>
+    </div>
+  </form>
 </article>
+<script src="/javascript/comment.js"></script>
