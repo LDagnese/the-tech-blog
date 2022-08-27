@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const withAuth = require("../utils/auth");
 const { Post, User, Comment } = require("../models");
 
 router.get("/", (req, res) => {
@@ -21,13 +22,7 @@ router.get("/", (req, res) => {
     });
 });
 
-router.get("/post/:id", (req, res) => {
-  // If not logged in and trying to get to a post page, redirect the user to login
-  if (!req.session.loggedIn) {
-    res.redirect("/login");
-    return;
-  }
-
+router.get("/post/:id", withAuth, (req, res) => {
   Post.findOne({
     where: {
       id: req.params.id,

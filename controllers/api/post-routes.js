@@ -97,12 +97,18 @@ router.delete("/:id", withAuth, (req, res) => {
 
 // UPDATE a Post
 router.put("/:id", withAuth, (req, res) => {
-  // Expects {"title": "", "content":"", "user_id":""}
-  Post.update(req.body, {
-    where: { id: req.params.id },
-  })
+  // Expects {"title": "", "content":"",}
+  Post.update(
+    {
+      title: req.body.title,
+      content: req.body.content,
+    },
+    {
+      where: { id: req.params.id },
+    }
+  )
     .then((dbPostData) => {
-      if (!dbPostData[0]) {
+      if (!dbPostData) {
         res.status(404).json({ message: "No post with this id." });
         return;
       }
